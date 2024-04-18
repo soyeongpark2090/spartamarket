@@ -9,10 +9,14 @@ def profile(request, username):
             member = get_object_or_404(get_user_model(), username=username)
             products = member.products.all()
             likes = member.like_articles.all()
+            followers = member.followers.all().count()
+            followings = member.followings.all().count()
             context = {
                 'member': member,
                 'products': products,
                 'likes': likes,
+                'followers': followers,
+                'followings': followings,
             }
             return render(request, 'users/profile.html', context)
         return redirect('products:products_list')
