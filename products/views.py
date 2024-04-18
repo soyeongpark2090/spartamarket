@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render, get_object_or_404
-from .models import Product
+from .models import Product, Comment
 from django.views.decorators.http import require_POST, require_http_methods
 from django.contrib.auth.decorators import login_required
 from .forms import ProductForm, CommentForm
@@ -76,3 +76,12 @@ def create_comment(request, pk):
             comment.save()
         return redirect('products:product_detail', pk)
     return redirect('accounts:login')
+
+
+@require_POST
+def delete_comment(request, pk, comment_pk):
+    if request.user.is_authenticated:
+        comment = get_object_or_404(Comment, pk=comment_pk)
+        if request.user == comment.author:
+            comment.delete()
+        return redirect('products:product_detail', pk)
