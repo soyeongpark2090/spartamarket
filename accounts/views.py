@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.views.decorators.http import require_POST, require_http_methods
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
 
 
 @require_http_methods(['POST', 'GET'])
@@ -48,3 +49,16 @@ def delete(request):
         request.user.delete()
         auth_logout(request)
         return redirect('products:products_list')
+
+
+@require_http_methods(['POST', 'GET'])
+def update(request):
+    if request.method == 'POST':
+        form = CustomUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('products:products_list')
+    else:
+        form = CustomUserChangeForm(instance=request.user)
+        context = {'form': form}
+        return render(request, 'accounts/update.html', context)
