@@ -14,6 +14,13 @@
 <p>가격: {{ product.price }}</p>
 <p>작성일시: {{ product.created_at }}</p>
 
+{% if request.user == product.author %}
+<a href="{% url 'products:update' product.pk %}">게시물 수정</a>
+<form action="{% url 'products:delete' product.pk %}" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="게시물 삭제">
+</form>
+{% endif %}
 
 <a href="{% url 'products:products_list' %}">목록으로</a>
 <a href="{% url 'products:create' %}">새로운 글 작성하기</a>
@@ -33,10 +40,12 @@
 {% for comment in comments %}
 {{ comment.author }} | {{ comment.content }}<br>
 
+{% if request.user == comment.author %}
 <form action="{% url 'products:delete_comment' product.pk comment.pk %}" method="POST">
     {% csrf_token %}
     <input type="submit" value="삭제">
 </form>
+{% endif %}
 {% endfor %}
 
 {% endblock %}

@@ -44,25 +44,30 @@ def create(request):
 def delete(request, pk):
     if request.user.is_authenticated:
         product = get_object_or_404(Product, id=pk)
-        product.delete()
-        return redirect('products:products_list')
+        if request.user == product.author:
+            product.delete()
+            return redirect('products:products_list')
+        return redirect('products:product_detail', product.pk)
+    return redirect('accounts:login')
 
 
 @require_http_methods(['POST', 'GET'])
 def update(request, pk):
     product = get_object_or_404(Product, pk=pk)
-    if request.method == 'POST':
-        form = ProductForm(request.POST, instance=product)
-        if form.is_valid():
-            form.save()
+    if request.user == product.author:
+        if request.method == 'POST':
+            form = ProductForm(request.POST, instance=product)
+            if form.is_valid():
+                form.save()
             return redirect('products:product_detail', pk)
-    else:
-        form = ProductForm(instance=product)
-        context = {
-            'form': form,
-            'product': product
-        }
-        return render(request, 'products/update.html', context)
+        else:
+            form = ProductForm(instance=product)
+            context = {
+                'form': form,
+                'product': product
+            }
+            return render(request, 'products/update.html', context)
+    return redirect('products:product_detail', pk)
 
 
 @require_POST
@@ -97,3 +102,4 @@ def delete_comment(request, pk, comment_pk):
         if request.user == comment.author:
             comment.delete()
         return redirect('products:product_detail', pk)
+    return redirect('products:products_list')
