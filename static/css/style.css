@@ -1,5 +1,6 @@
 body h1,
-h3 {
+h3,
+span {
     color: #FCA205;
     font-family: 'Lobster';
 }
@@ -7,4 +8,34 @@ h3 {
 body {
     color: brown;
     font-family: "IBM Plex Sans KR", sans-serif;
+}
+
+
+header a span {
+    margin-left: 20px;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+}
+
+
+body {
+    background-image: url("https://images.unsplash.com/photo-1615800098779-1be32e60cca3?q=80&w=1910&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+    background-position: center;
+    background-size: cover;
+}
+
+.greet {
+    margin-right: 20px;
 }

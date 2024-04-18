@@ -48,7 +48,7 @@ def delete(request):
     if request.user.is_authenticated:
         request.user.delete()
         auth_logout(request)
-    return redirect('accounts:login')
+    return redirect('products:products_list')
 
 
 @require_http_methods(['POST', 'GET'])

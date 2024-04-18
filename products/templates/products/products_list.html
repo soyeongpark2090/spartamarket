@@ -2,11 +2,33 @@
 
 {% block content %}
 <h1>Products List</h1>
-<p>환영합니다!</p>
-<a href="{% url 'products:create' %}">새로운 글 작성하기</a>
+<br>
+<a href="{% url 'products:create' %}"><button class="btn btn-outline-warning">새로운 글 작성하기</button></a>
+<br><hr><br>
 
 
-{% for product in products %}
+<div class="row">
+    {% for product in products %}
+    <div class="col-md-3">
+      <div class="card text-primary-emphasis" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <h6 class="card-subtitle mb-2 text-body-secondary">{{ product.author }}</h6>
+          <p class="card-text">{{ product.title }}</p>
+          <a href="{% url 'products:product_detail' product.pk %}" class="card-link">보러가기</a>
+        </div>
+      </div>
+      <br>
+    </div>
+    {% endfor %}
+  </div>
+  
+  {% endblock content %}
+
+
+
+
+{% comment %} {% for product in products %}
 <ul>
     <a href="{% url 'products:product_detail' product.pk %}"><li>[{{ product.id}}] {{ product.title}}</li></a>
 </ul>
@@ -19,4 +41,4 @@
     {% endif %}
 </form>
 {% endfor %}
-{% endblock content %}
+{% endblock content %} {% endcomment %}
