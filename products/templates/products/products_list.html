@@ -8,5 +8,13 @@
 <ul>
     <a href="{% url 'products:product_detail' product.pk %}"><li>[{{ product.id}}] {{ product.title}}</li></a>
 </ul>
+<form action="{% url 'products:like' product.pk %}" method="POST">
+    {% csrf_token %}
+    {% if request.user not in product.like_users.all %}
+    <input type="submit" value="찜">
+    {% else%}
+    <input type="submit" value="찜 아니야">
+    {% endif %}
+</form>
 {% endfor %}
 {% endblock content %}

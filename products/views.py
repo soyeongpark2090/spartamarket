@@ -66,6 +66,18 @@ def update(request, pk):
 
 
 @require_POST
+def like(request, pk):
+    if request.user.is_authenticated:
+        product = get_object_or_404(Product, pk=pk)
+        if product.like_users.filter(pk=request.user.id).exists():
+            product.like_users.remove(request.user)
+        else:
+            product.like_users.add(request.user)
+        return redirect('products:products_list')
+    return redirect('accounts:login')
+
+
+@require_POST
 def create_comment(request, pk):
     if request.user.is_authenticated:
         form = CommentForm(request.POST)
