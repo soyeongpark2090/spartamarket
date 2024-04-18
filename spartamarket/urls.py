@@ -18,11 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-
+from products import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('products/', include('products.urls'))
+    path('', views.products_list),
+    path('products/', include('products.urls')),
 ]
 
 if settings.DEBUG:  # 이게 있어야 개발 모드(DEBUG:True)에서 media파일 사용 가능
