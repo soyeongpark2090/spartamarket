@@ -26,6 +26,7 @@ urlpatterns = [
     path('', views.products_list),
     path('products/', include('products.urls')),
     path('accounts/', include('accounts.urls')),
+    path('users/', include('users.urls')),
 ]
 
 if settings.DEBUG:  # 이게 있어야 개발 모드(DEBUG:True)에서 media파일 사용 가능
