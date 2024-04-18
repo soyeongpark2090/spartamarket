@@ -20,6 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from products import views
 
+app_name = "products"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.products_list),
