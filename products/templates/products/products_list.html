@@ -3,6 +3,7 @@
 {% block content %}
 <h1>Products List</h1>
 <p>환영합니다!</p>
+<a href="{% url 'products:create' %}">새로운 글 작성하기</a>
 
 
 {% for product in products %}
