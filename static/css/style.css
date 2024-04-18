@@ -1,0 +1,10 @@
+body h1,
+h3 {
+    color: #FCA205;
+    font-family: 'Lobster';
+}
+
+body {
+    color: brown;
+    font-family: "IBM Plex Sans KR", sans-serif;
+}

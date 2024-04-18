@@ -15,14 +15,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from products import views
 
+app_name = "products"
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.products_list),
+    path('products/', include('products.urls')),
 ]
-
 
 if settings.DEBUG:  # 이게 있어야 개발 모드(DEBUG:True)에서 media파일 사용 가능
     urlpatterns += static(settings.MEDIA_URL,
