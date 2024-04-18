@@ -3,4 +3,10 @@
 {% block content %}
 <h1>Products List</h1>
 <p>환영합니다!</p>
+
+{% for product in products %}
+<ul>
+    <a href="{% url 'products:product_detail' product.pk %}"><li>[{{ product.id}}] {{ product.title}}</li></a>
+</ul>
+{% endfor %}
 {% endblock content %}

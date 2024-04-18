@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 
 
 class Product(models.Model):
+    name = models.CharField(max_length=30)
     title = models.CharField(max_length=50)
     content = models.TextField()
     price = models.PositiveIntegerField()

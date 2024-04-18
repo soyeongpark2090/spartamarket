@@ -2,5 +2,35 @@
 
 {% block content %}
 <h1>Product Detail Page</h1>
+<h3>{{ product.title }}</h3>
 
-{% endblock content %}
+{% if product.images %}
+<img src="{{ product.images.url }}">
+{% endif %}
+
+<p>물건명: {{ product.name }}</p>
+<p>상세내용: {{ product.content }}</p>
+<p>가격: {{ product.price }}</p>
+<p>작성일시: {{ product.created_at }}</p>
+
+
+<a href="{% url 'products:products_list' %}">목록으로</a>
+<a href="{% url 'products:create' %}">새로운 글 작성하기</a>
+
+{% if request.user.is_authenticated %}
+<br>
+<hr>
+<h3>댓글 쓰기</h3>
+<form action="{% url 'products:create_comment' product.pk %}" method="POST">
+    {% csrf_token %}
+    {{ comment_form.as_p }}
+    <input type="submit" value="저장">
+</form>
+{% endif %}<hr>
+
+<h3>댓글 {{ comments|length }}개</h3>
+{% for comment in comments %}
+{{ comment.author }} | {{ comment.content }}<br>
+{% endfor %}
+
+{% endblock %}
