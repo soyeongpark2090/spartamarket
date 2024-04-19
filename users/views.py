@@ -18,6 +18,7 @@ def profile(request, username):
                 'followers': followers,
                 'followings': followings,
             }
+            print(member.username)
             return render(request, 'users/profile.html', context)
         return redirect('products:products_list')
     return redirect('accounts:login')
