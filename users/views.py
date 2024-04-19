@@ -20,7 +20,7 @@ def profile(request, username):
             }
             return render(request, 'users/profile.html', context)
         return redirect('products:products_list')
-    return redirect('products:products_list')
+    return redirect('accounts:login')
 
 
 def follow(request, username):
@@ -31,6 +31,5 @@ def follow(request, username):
                 member.followers.add(request.user)
             else:
                 member.followers.remove(request.user)
-            return redirect('users:profile', username=username)
-        return redirect('products:products_list')
+        return redirect('users:profile', username=username)
     return redirect('accounts:login')

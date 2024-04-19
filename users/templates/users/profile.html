@@ -3,30 +3,33 @@
 {% block content %}
 <h1>{{ member.username }}의 프로필 페이지</h1>
 
-<form action="{% url 'users:follow' username=member.username %}" method="POST">
+<form class="follow" action="{% url 'users:follow' username=member.username %}" method="POST">
     {% csrf_token %}
     {% if request.user in member.followers.all %}
-    <input type="submit" value="언팔로잉">
+    <p>>> <button class="btn btn-link"><i class="fa-solid fa-user-minus"></i></button></p>
     {% else %}
-    <input type="submit" value="팔로잉">
+    <p>>> <button class="btn btn-link"><i class="fa-solid fa-user-plus"></i></button></p>
     {% endif %}
 </form>
 <p>팔로우: {{ followings }}</p>
 <p>팔로워: {{ followers }}</p>
+<hr>
 
 
-<p>가입일: {{ member.date_joined }}</p>
-<p>내가 등록한 물건들</p> 
+<h5>가입일: {{ member.date_joined }}</h5>
+<hr>
+<h5>{{ member.username }}가 등록한 물건들</h5>
 {% for product in products %}
 <ul>
-<li><a href="{% url 'products:product_detail' product.pk %}">{{ product.name }}</a></li>
+    <li><a href="{% url 'products:product_detail' product.pk %}">{{ product.name }}</a></li>
 </ul>
 {% endfor %}
+<hr>
 
-<p>내가 찜한 물건들</p> 
+<h5>{{ member.username }}가 찜한 물건들</h5>
 {% for like in likes %}
 <ul>
-<li><a href="{% url 'products:product_detail' like.pk %}">{{ like.name }} [{{ like.title }}]</a></li>
+    <li><a href="{% url 'products:product_detail' like.pk %}">{{ like.name }}</a></li>
 </ul>
 {% endfor %}
 

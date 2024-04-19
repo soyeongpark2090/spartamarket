@@ -3,6 +3,7 @@ from .models import Product, Comment
 from django.views.decorators.http import require_POST, require_http_methods
 from django.contrib.auth.decorators import login_required
 from .forms import ProductForm, CommentForm
+from django.contrib.auth import get_user_model
 
 
 def products_list(request):

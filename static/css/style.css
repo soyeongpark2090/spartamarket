@@ -20,6 +20,11 @@ header a span {
     margin-right: 20px;
 }
 
+
+.move {
+    display: flex;
+}
+
 .btn {
     display: flex;
     align-items: center;
@@ -49,4 +54,8 @@ body {
 
 img {
     width: 250px;
+}
+
+.follow p button {
+    font-size: xx-large
 }
