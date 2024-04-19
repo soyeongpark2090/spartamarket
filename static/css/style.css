@@ -1,19 +1,17 @@
-body h1,
-h3,
-span {
+body span {
     color: #FCA205;
     font-family: 'Lobster';
 }
 
-body {
-    color: brown;
-    font-family: "IBM Plex Sans KR", sans-serif;
+* {
+    color: rgb(48, 48, 56);
+    font-family: "Noto Sans KR", sans-serif;
 }
-
 
 header a span {
-    margin-left: 20px;
+    margin-left: 30px;
 }
+
 
 .nav {
     display: flex;
@@ -29,6 +27,9 @@ header a span {
     margin-right: 20px;
 }
 
+.container {
+    margin-bottom: 30px;
+}
 
 body {
     background-image: url("https://images.unsplash.com/photo-1615800098779-1be32e60cca3?q=80&w=1910&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
@@ -38,4 +39,14 @@ body {
 
 .greet {
     margin-right: 20px;
+}
+
+.fstbtn {
+    width: 280px;
+    display: flex;
+    justify-content: space-around;
+}
+
+img {
+    width: 250px;
 }

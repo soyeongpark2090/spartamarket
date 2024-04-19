@@ -1,42 +1,47 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Product Detail Page</h1>
-<h3>{{ product.title }}</h3>
+
+<h2>{{ product.title }}</h2>
+<br>
+
 
 {% if product.images %}
 <img src="{{ product.images.url }}">
 {% endif %}
-
-<a href="{% url 'users:profile' username=product.author %}"><p>작성자: {{ product.author }}</p></a>
+<br><br>
+<a href="{% url 'users:profile' username=product.author %}">
+    <p>작성자: {{ product.author }}</p>
+</a>
 <p>물건명: {{ product.name }}</p>
 <p>상세내용: {{ product.content }}</p>
-<p>가격: {{ product.price }}</p>
+<p>가격: {{ product.price }}원</p>
 <p>작성일시: {{ product.created_at }}</p>
 
 {% if request.user == product.author %}
-<a href="{% url 'products:update' product.pk %}">게시물 수정</a>
-<form action="{% url 'products:delete' product.pk %}" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="게시물 삭제">
-</form>
+<div class="fstbtn">
+    <a href="{% url 'products:update' product.pk %}"><button class="btn btn-outline-warning">게시물 수정</button></a>
+    <form action="{% url 'products:delete' product.pk %}" method="POST">
+        {% csrf_token %}
+        <button class="btn btn-outline-warning">게시물 삭제</button>
+    </form>
+</div>
 {% endif %}
 
-<a href="{% url 'products:products_list' %}">목록으로</a>
-<a href="{% url 'products:create' %}">새로운 글 작성하기</a>
 
 {% if request.user.is_authenticated %}
 <br>
 <hr>
-<h3>댓글 쓰기</h3>
+<h4>댓글 쓰기</h4>
 <form action="{% url 'products:create_comment' product.pk %}" method="POST">
     {% csrf_token %}
     {{ comment_form.as_p }}
     <input type="submit" value="저장">
 </form>
-{% endif %}<hr>
+{% endif %}
+<hr>
 
-<h3>댓글 {{ comments|length }}개</h3>
+<h4>댓글 {{ comments|length }}개</h4>
 {% for comment in comments %}
 {{ comment.author }} | {{ comment.content }}<br>
 
