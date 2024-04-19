@@ -84,4 +84,5 @@
   - Shows the number of followers and following users at the bottom of the Follow button.
      
 
-
+## 📄 ERD:
+![ERD_SpartaMarket](https://github.com/soyeongpark2090/spartamarket/assets/159408752/7b749245-37fe-430c-b5d7-fd178632a5c4)
