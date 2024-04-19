@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>{{ member.username }}의 프로필 페이지</h1>
-<a href="{% url 'products:products_list' %}">목록으로</a>
+
 <form action="{% url 'users:follow' username=member.username %}" method="POST">
     {% csrf_token %}
     {% if request.user in member.followers.all %}

@@ -36,7 +36,7 @@
 <form action="{% url 'products:create_comment' product.pk %}" method="POST">
     {% csrf_token %}
     {{ comment_form.as_p }}
-    <input type="submit" value="저장">
+    <button class="btn btn-outline-warning">저장</button>
 </form>
 {% endif %}
 <hr>
@@ -48,7 +48,7 @@
 {% if request.user == comment.author %}
 <form action="{% url 'products:delete_comment' product.pk comment.pk %}" method="POST">
     {% csrf_token %}
-    <input type="submit" value="삭제">
+    <button class="btn btn-outline-warning">삭제</button>
 </form>
 {% endif %}
 {% endfor %}
